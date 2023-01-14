@@ -72,4 +72,18 @@ The webpage looks like that:
 
 ![Presentation](inici.png)
 
+Once the user presses the button that says "Try it now", the user is led to the interpreter (with route /result). It contains three sections:
+
+- Functions: It contains the names of the functions that have been declared. It obviously starts empty.
+
+- Console: It is a box that admits text coming from the user. When the input is ready, the "Run" button should be pressed.
+
+- Results: It displays the last five given inputs and obtained responses (including errors).
+
+
+It looks like that:
+
+![Result](result.png)
+
+
 
