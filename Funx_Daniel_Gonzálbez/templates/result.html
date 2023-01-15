@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title> Funx interpreter </title>
+{% endblock %}
+
+
+{% block body %}  <!-- provides the contents of block body -->
+<h1 class = "title">Funx interpreter</h1>
+<div class = "functions">
+    <h1> Functions: </h1> <!-- h1 es header , a es action-->
+    <ul class = "list_functions">
+        {% for fun in form_data[1] %}
+            <li>{{fun}}</li>
+        {% endfor %}
+    </ul>
+    <div class = "console" >
+        <h1> Console: </h1> 
+        <form action = "/result" method = "POST">
+            <input type="text" name ="input_text" id="input_text" class="input_text"><br>
+            <input type="submit" value="Run">
+        </form>
+    </div>
+</div>
+
+
+
+<div class = "results" >
+    <h1> Results: </h1>
+    {% for dict in form_data[0] %}
+        <h2>
+            <span class="in_display"> In {{dict['idx']}}:</span>
+            <span class="out_display"> {{dict['input']}} </span>
+        </h2>
+        <h2>
+            <span class="in_display"> Out {{dict['idx']}}:</span>
+            <span class="out_display"> {{dict['result']}} </span>
+        </h2>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title> Funx interpreter </title>
+{% endblock %}
+
+
+{% block body %}  <!-- provides the contents of block body -->
+<div class = "title_begin">
+    <h1>Welcome to the Funx interpreter!</h1>
+    <div class = "presentation_begin">
+        <p> This is the interpreter of Funx, a programming language based on expressions and functions.</p>
+        <p> The author of this webpage is Daniel Gonzálbez. </p> 
+        <form action = "/begin" method = "GET">
+            <input type="submit" value="Try it now" class="submit">
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+
