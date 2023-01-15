@@ -9,7 +9,7 @@ It can be divided in 3 parts:
 
 ## Grammar of the language
 
-Funx is a language that allows us declare functions and define a final expression. 
+Funx is a language that allows us declare functions (zero or more) and, optionally, define a final expression. 
 
 ```bash
 grammar Expr ;
@@ -18,19 +18,13 @@ root : declare_function* expr? EOF;
 
 declare_function : FUN VAR* '{' bloc '}' ;
 ```
+The names of the functions (FUN in the grammar) start with a capital letter, while the formal parameters (VAR in the grammar) start with a lower case letter.
 
 It supports the most common arithmetic operands (+, -, *, /, %, ^) as well as some logical operators (=, !=, <, >, <=, >=). It also supports the boolean operators 'and' and 'or'. They all return 1 if an expression is True and 0 in the opposite case.
 
-Funx contemplates different instructions, that are indicated in the grammar:
+Funx contemplates different instructions, that are indicated in the grammar, such as the assignment of values to local variables (there are no global variables), if and if-else constructions or loops using the keyword while.
 
-```bash
-instr : VAR '<-' expr # assign
-      | 'if' expr '{' bloc '}' # if
-      | 'if' expr '{' bloc '}' 'else' '{' bloc '}' # ifelse
-      | 'while' expr '{' bloc '}' # while
-      | expr # ret_expression
-      ;
-```
+
 
 ## Abstract Syntax Tree visitor
 
@@ -45,11 +39,6 @@ The first one is updated when a new function is declared. The keys of the dictio
 The latter one is used every time a function is called. The last appended dictionary (it is added to the list when a function is called) contains the correspondance between the names of the formal parameters (extracted from func_dict) and the given values in a call. After visiting the list of instructions (that were saved in the dictionary of functions) and obtaining its result, the last element of symbol_stack is removed.
 
 
-
-
-
-
-
 #### Errors:
 
 It detects the following errors:
@@ -59,9 +48,7 @@ It detects the following errors:
 - Definition of an already defined function.
 - Repetition of names for the formal parameters of a function.
 - Incorrect number of given parameters.
-
-
-
+- Try to define or evaluate global variables.
 
 
 ## The interpreter
@@ -100,6 +87,7 @@ Then, the webpage can be run with the follwong commands:
 export FLASK_APP=web.py
 flask run
 ```
+
 
 
 
