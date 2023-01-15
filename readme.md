@@ -3,9 +3,9 @@
 This project aims to develop an interpreter for a language based on expressions and functions. The input and output of the interpreter is done via a web page. 
 
 It can be divided in 3 parts:
-1. Grammar of the language
-2. Abstract Syntax Tree visitor
-3. Development of the web
+1. [**Grammar of the language**] (##Grammar-of-the-language)
+2. **Abstract Syntax Tree visitor**
+3. **Development of the web**
 
 ## Grammar of the language
 
@@ -30,7 +30,7 @@ Funx contemplates different instructions, that are indicated in the grammar, suc
 
 From the grammar, an abstract syntax tree (AST) is created with the help of ANTLR. This AST is visited through the visitors, whose interface (that describes its minimum behavior) is also generated with ANTLR. Then we have to develop the specific implementation of the visitor, which navigates through the ASTs.
 
-The class Evalvisitor (that inherits the class ExprVisitor defined in the interface) contains different methods corresponding to the different rules declared in the grammar. All the methods start by getting a list of all the elements in the context with: ```bash l = list(ctx.getChildren())```. The length of this list depends on the specification of each method in the grammar. For example, the method corresponding to the if-else instruction will get a list of 9 elements, but we will be just using the ones in positions 1, 3 and 7. 
+The class Evalvisitor (that inherits the class ExprVisitor defined in the interface) contains different methods corresponding to the different rules declared in the grammar. All the methods start by getting a list of all the elements in the context with: ```l = list(ctx.getChildren())```. The length of this list depends on the specification of each method in the grammar. For example, the method corresponding to the if-else instruction will get a list of 9 elements, but we will be just using the ones in positions 1, 3 and 7. 
 
 The root method gets all the elements in the context and visits them one by one (if there is an expression, it will return its result). The same happens with the list of instructions contained in a block. The visitBloc method runs through them. Apart from that, two objects that the class contains and are fundamental when navigating through the AST nodes are a dictionary called func_dict and a list of dictionaries named symbol_stack: 
 
@@ -53,15 +53,15 @@ It detects the following errors:
 
 ## The interpreter
 
-The inputs and outputs of the Funx interpreter are processed via a web page. This service has been developed with ```bash flask``` in combination with the library ```bash Jinja2``` to generate and render HTML templates. 
+The inputs and outputs of the Funx interpreter are processed via a web page. This service has been developed with ```flask``` in combination with the library ```Jinja2``` to generate and render HTML templates. 
 
 The webpage looks like that:
 
 ![Presentation](inici.png)
 
-Once the user presses the button that says "Try it now", the user is led to the interpreter (with route /result). It contains three sections:
+Once the user presses the button that says "Try it now", the user is led to the interpreter (with route '/result'). It contains three sections:
 
-- **Function**s: It contains the names of the functions that have been declared. It obviously starts empty.
+- **Functions**: It contains the names of the functions that have been declared. It obviously starts empty.
 
 - **Console**: It is a box that admits text coming from the user. When the input is ready, the "Run" button should be pressed.
 
