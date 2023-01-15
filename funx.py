@@ -1,8 +1,9 @@
-from flask import Flask , render_template, request
+from flask import Flask, render_template, request
 from antlr4 import *
 from funxLexer import funxLexer
 from funxParser import funxParser
 from funxVisitor import funxVisitor
+
 
 class EvalVisitor(funxVisitor):
     def __init__(self):
@@ -133,19 +134,22 @@ app = Flask(__name__)
 
 visitor = EvalVisitor()
 
-inputs_results = [] # list of 5 dictionaries with the last 5 inputs and results
-num_result = 1 # idx of the next input
+inputs_results = []  # list of 5 dictionaries with the last 5 inputs and results
+num_result = 1  # idx of the next input
 declared_fun = []
 
-@app.route('/') # welcome page 
+
+@app.route('/')  # welcome page
 def index():
     return render_template('index.html')
 
-@app.route('/begin', methods = ['GET']) # initialize page 
-def process_no_input():
-    return render_template('result.html', form_data = [[],[]])
 
-@app.route('/result', methods=['POST']) # update page
+@app.route('/begin', methods=['GET'])  # initialize page
+def process_no_input():
+    return render_template('result.html', form_data=[[], []])
+
+
+@app.route('/result', methods=['POST'])  # update page
 def process_input():
     text = request.form['input_text']
     input_stream = InputStream(text)
@@ -157,20 +161,18 @@ def process_input():
         res = visitor.visit(tree)
         # Check if there are multiple functions declared:
         i = -1
-        while(text[i+1:].find("{") != -1 and i < len(text)): 
+        while(text[i+1:].find("{") != -1 and i < len(text)):
             j = text.find("{") + i + 1
             declared_fun.append(text[i+1:j])
             i = text[j:].find("}") + j
     except Exception as e:
         res = 'ERROR: ' + str(e)
-    if len(inputs_results) == 5: # just show the last 5 results
+    if len(inputs_results) == 5:  # just show the last 5 results
         inputs_results.pop(-5)
     global num_result
     inputs_results.append({"input": text, "result": res, "idx": num_result})
     num_result += 1
-    return render_template('result.html', form_data = [reversed(inputs_results), declared_fun])
-
-
+    return render_template('result.html', form_data=[reversed(inputs_results), declared_fun])
 
 if __name__ == "__main__":
     app.run(debug=True)

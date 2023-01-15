@@ -12,7 +12,7 @@ It can be divided in 3 parts:
 Funx is a language that allows us declare functions (zero or more) and, optionally, define a final expression. Its syntax is specified in its grammar (funx.g4).
 
 ```bash
-grammar Expr ;
+grammar funx ;
 
 root : declare_function* expr? EOF; 
 
@@ -59,7 +59,7 @@ The webpage looks like that:
 
 ![Presentation](inici.png)
 
-Once the user presses the button that says "Try it now", the user is led to the interpreter (with route '/result'). It contains three sections:
+Once the user presses the button that says "Try it now", the user is led to the interpreter (with route '/begin' and then with route '/result'). It contains three sections:
 
 - **Functions**: It contains the names of the functions that have been declared. It obviously starts empty.
 
