@@ -3,9 +3,9 @@
 This project aims to develop an interpreter for a language based on expressions and functions. The input and output of the interpreter is done via a web page. 
 
 It can be divided in 3 parts:
-1. [Grammar of the language] (#grammar-of-the-language)
-2. **Abstract Syntax Tree visitor**
-3. **Development of the web**
+1. [Grammar of the language](#grammar-of-the-language)
+2. [Abstract Syntax Tree visitor](#abstract-syntax-tree-visitor)
+3. [The interpreter](#the-interpreter)
 
 ## Grammar of the language
 
